@@ -1,0 +1,70 @@
+body {
+    font-size: 18px;
+    line-height: normal;
+    color: black;
+    font-family: 'Times New Roman', Georgia, Times, sans-serif;
+    font-weight: normal;
+}
+
+header {
+    padding: 6em 8em 4em;
+    text-align: center;
+    color: #ffffff;
+    background-color: #174cab;
+}
+
+h1 {
+    text-transform: uppercase;
+    margin: 1em 0;
+}
+
+.form {
+    text-align: center;
+}
+
+#box_form {
+    border: 1px solid#2493c7;
+    width: 40%;
+    margin: 12px auto;
+    text-align: center;
+}
+
+.content {
+    margin: 10px;
+    padding: 5px;
+}
+
+table {
+    margin: 10px;
+    border: 1px solid grey;
+    width: 100%;
+}
+
+th {
+    border: 1px solid grey;
+}
+
+td {
+    border: 1px solid grey;
+}
+
+textarea {
+    padding: 0;
+    border: 0;
+    width: 100%;
+    resize: none;
+    height: 10vh;
+    white-space: normal;
+    text-align: center;
+}
+
+.todo_list {
+    margin: 0 10em;
+}
+
+footer {
+    padding: 1em 1.5em;
+    background: #A7B8BF;
+    color: white;
+    text-align: left;
+}
