@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Todo list</title>
+
+  <!--    <link rel="stylesheet" href="css/reset.css">-->
+  <link rel="stylesheet" href="./css/todo_list.css">
+  <script src="./js/todo_list.js"></script>
+  {{> style_bundles }}
+  {{> shared_scripts }}
+</head>
+
+<body>
+<header>
+  {{> header }}
+</header>
+<main>
+  <div class="form">
+    <form id="box_form">
+      <p class="content">
+        <label for="lang">
+          <span class="label_lang">Выберите язык расписания: </span>
+          <select name="language" id="lang" onchange="switch_lang()">
+            <option value="rus">Русский</option>
+            <option value="eng">English</option>
+          </select>
+        </label>
+      </p>
+
+      <p class="content">
+        <label for="max_tasks">
+          <span class="max_tasks">Количество задач в день:</span>
+          <input name="max_tasks" id="max_tasks" type="number" min="1">
+        </label>
+      </p>
+    </form>
+
+    <button class="submit" onclick="get_table(); save_data();">Отправить</button>
+    <button class="clear" onclick="clear()">Очистить</button>
+  </div>
+
+  <div class="todo_list">
+    <table class="table">
+      <tr class="table_header">
+        <th>Понедельник</th>
+        <th>Вторник</th>
+        <th>Среда</th>
+        <th>Четверг</th>
+        <th>Пятница</th>
+        <th>Суббота</th>
+        <th>Воскресенье</th>
+      </tr>
+    </table>
+  </div>
+</main>
+<script>
+  init()
+</script>
+<footer>
+  {{> footer }}
+</footer>
+</body>
+</html>
