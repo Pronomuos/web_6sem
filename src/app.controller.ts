@@ -11,7 +11,6 @@ import {
   Res,
   Req,
 } from '@nestjs/common';
-// import firebase from 'firebase/compat/app';
 
 @Controller()
 export class AppController {
@@ -19,8 +18,7 @@ export class AppController {
   email: string;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private readonly appService: AppService) {
-  }
+  constructor(private readonly appService: AppService) {}
 
   @Get()
   @Render('index')
