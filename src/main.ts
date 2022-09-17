@@ -1,7 +1,12 @@
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { ValidationPipe } from '@nestjs/common';
 import { join } from 'path';
 import { AppModule } from './app.module';
+import { LanguageModule } from './language/language.module';
+import { SkillModule } from './skill/skill.module';
+import { CourseModule } from './course/course.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -21,7 +26,19 @@ async function bootstrap() {
     return accum;
   });
 
-  await app.listen(process.env.PORT || 8080);
-  // await app.listen(8080);
+  const config = new DocumentBuilder()
+    .setTitle('Reshetnikov Roman CV.')
+    .setDescription('CV API description.')
+    .setVersion('1.0')
+    .addTag('ITMO web labs')
+    .build();
+  const document = SwaggerModule.createDocument(app, config, {
+    include: [LanguageModule, SkillModule, CourseModule],
+  });
+
+  SwaggerModule.setup('api', app, document);
+  app.useGlobalPipes(new ValidationPipe());
+  // await app.listen(process.env.PORT || 8080);
+  await app.listen(8080);
 }
 bootstrap();

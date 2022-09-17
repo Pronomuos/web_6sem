@@ -1,0 +1,21 @@
+footer {
+    padding: 1em 1.5em;
+    background: #A7B8BF;
+    color: white;
+    text-align: left;
+}
+
+.references {
+    display: flex;
+    flex-direction: column;
+}
+
+.contacts {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    left: 4.5em;
+    z-index: 2;
+    padding: 40px 0;
+    max-width: 150px;
+}

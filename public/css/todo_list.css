@@ -6,18 +6,6 @@ body {
     font-weight: normal;
 }
 
-header {
-    padding: 6em 8em 4em;
-    text-align: center;
-    color: #ffffff;
-    background-color: #174cab;
-}
-
-h1 {
-    text-transform: uppercase;
-    margin: 1em 0;
-}
-
 .form {
     text-align: center;
 }
@@ -60,11 +48,4 @@ textarea {
 
 .todo_list {
     margin: 0 10em;
-}
-
-footer {
-    padding: 1em 1.5em;
-    background: #A7B8BF;
-    color: white;
-    text-align: left;
 }

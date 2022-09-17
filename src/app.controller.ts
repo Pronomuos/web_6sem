@@ -1,7 +1,4 @@
 import { AppService } from './app.service';
-import { JwtAuthGuard } from './auth/jwt-auth-guard';
-import { LocalAuthGuard } from './auth/local-auth-guard';
-import { AuthService } from './auth/auth.service';
 import { TimerInterceptor } from './timer.interceptor';
 import {
   Controller,
@@ -12,58 +9,81 @@ import {
   UseGuards,
   UseInterceptors,
   Res,
+  Req,
 } from '@nestjs/common';
+import firebase from 'firebase/compat/app';
 
 @Controller()
 export class AppController {
+  authorized = false;
+  email: string;
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private readonly appService: AppService) {}
 
   @Get()
   @Render('index')
   @UseInterceptors(TimerInterceptor)
   root() {
-    return { signed_in: true };
+    return { authorized: this.authorized, email: this.email };
   }
 
   @Get('blog')
   @Render('blog')
   @UseInterceptors(TimerInterceptor)
   blog() {
-    return { signed_in: true };
+    return { authorized: this.authorized, email: this.email };
   }
 
   @Get('slider')
   @Render('slider')
   @UseInterceptors(TimerInterceptor)
   slider() {
-    return;
+    return { authorized: this.authorized, email: this.email };
   }
 
   @Get('todo_list')
   @Render('todo_list')
   @UseInterceptors(TimerInterceptor)
   todoList() {
-    return;
+    return { authorized: this.authorized, email: this.email };
   }
 
-  @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  async login(@Res() res) {
-    return res.redirect('/');
+  async login(@Req() req, @Res() res) {
+    try {
+      await firebase
+        .auth()
+        .signInWithEmailAndPassword(req.body.email, req.body.password);
+      this.authorized = true;
+      this.email = req.body.email;
+      return res.redirect('back');
+    } catch (e) {
+      console.log('Unable to authorize.');
+      this.authorized = true;
+      this.email = 'email';
+      return res.redirect('back');
+    }
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
-  getProfile(@Request() req) {
-    return req.user;
+  @Post('auth/register')
+  async register(@Req() req, @Res() res) {
+    try {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(req.body.email, req.body.password);
+      this.authorized = true;
+      this.email = req.body.email;
+      return res.redirect('back');
+    } catch (e) {
+      console.log('Unable to register.');
+      return res.redirect('back');
+    }
   }
 
-  @UseGuards(LocalAuthGuard)
   @Post('logout')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async logout(@Request() req) {
-    return {
-      signed_in: true,
-    };
+  async logout(@Req() req, @Res() res) {
+    this.authorized = false;
+    return res.redirect('back');
   }
 }
