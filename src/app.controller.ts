@@ -11,7 +11,7 @@ import {
   Res,
   Req,
 } from '@nestjs/common';
-import firebase from 'firebase/compat/app';
+// import firebase from 'firebase/compat/app';
 
 @Controller()
 export class AppController {
@@ -19,7 +19,8 @@ export class AppController {
   email: string;
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) {
+  }
 
   @Get()
   @Render('index')
@@ -48,42 +49,43 @@ export class AppController {
   todoList() {
     return { authorized: this.authorized, email: this.email };
   }
-
-  @Post('auth/login')
-  async login(@Req() req, @Res() res) {
-    try {
-      await firebase
-        .auth()
-        .signInWithEmailAndPassword(req.body.email, req.body.password);
-      this.authorized = true;
-      this.email = req.body.email;
-      return res.redirect('back');
-    } catch (e) {
-      console.log('Unable to authorize.');
-      this.authorized = true;
-      this.email = 'email';
-      return res.redirect('back');
-    }
-  }
-
-  @Post('auth/register')
-  async register(@Req() req, @Res() res) {
-    try {
-      await firebase
-        .auth()
-        .createUserWithEmailAndPassword(req.body.email, req.body.password);
-      this.authorized = true;
-      this.email = req.body.email;
-      return res.redirect('back');
-    } catch (e) {
-      console.log('Unable to register.');
-      return res.redirect('back');
-    }
-  }
-
-  @Post('logout')
-  async logout(@Req() req, @Res() res) {
-    this.authorized = false;
-    return res.redirect('back');
-  }
 }
+
+//   @Post('auth/login')
+//   async login(@Req() req, @Res() res) {
+//     try {
+//       await firebase
+//         .auth()
+//         .signInWithEmailAndPassword(req.body.email, req.body.password);
+//       this.authorized = true;
+//       this.email = req.body.email;
+//       return res.redirect('back');
+//     } catch (e) {
+//       console.log('Unable to authorize.');
+//       this.authorized = true;
+//       this.email = 'email';
+//       return res.redirect('back');
+//     }
+//   }
+//
+//   @Post('auth/register')
+//   async register(@Req() req, @Res() res) {
+//     try {
+//       await firebase
+//         .auth()
+//         .createUserWithEmailAndPassword(req.body.email, req.body.password);
+//       this.authorized = true;
+//       this.email = req.body.email;
+//       return res.redirect('back');
+//     } catch (e) {
+//       console.log('Unable to register.');
+//       return res.redirect('back');
+//     }
+//   }
+//
+//   @Post('logout')
+//   async logout(@Req() req, @Res() res) {
+//     this.authorized = false;
+//     return res.redirect('back');
+//   }
+// }
