@@ -7,15 +7,18 @@ import {
   Param,
   HttpException,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import {
   ApiOperation,
   ApiOkResponse,
   ApiBadRequestResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import { CourseService } from './course.service';
 import { CourseDto } from './dto/course.dto';
 import { Course } from '@prisma/client';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('course')
 export class CourseController {
@@ -27,6 +30,8 @@ export class CourseController {
   @ApiOkResponse({
     description: 'Courses are extracted.',
   })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Get('all')
   public async getAllCourses(): Promise<Course[]> {
     return this.courseService.courses({});
@@ -38,6 +43,8 @@ export class CourseController {
   @ApiOkResponse({
     description: 'Course has been added.',
   })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Post('create')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async addCourse(@Body() courseData: CourseDto): Promise<Course> {
@@ -59,6 +66,8 @@ export class CourseController {
   @ApiBadRequestResponse({
     description: 'Course is not found.',
   })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard)
   @Delete(':id/delete')
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async deleteCourseById(@Param('id') id: number): Promise<Course> {

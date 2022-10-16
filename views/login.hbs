@@ -1,7 +1,18 @@
-{{#unless authorized}}
-  <!-- Login for -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Login page</title>
+
+  {{> shared_scripts }}
+  {{> style_bundles }}
+</head>
+<body>
+<header>
+  <!-- Login form -->
   <div class="login-wrapper">
-    <form id="login">
+    <form id="sign_in">
       <label for="email">
         <input placeholder="Email" type="text" id="signin_email" name="email">
       </label>
@@ -13,7 +24,7 @@
   </div>
   <!-- Registration form -->
   <div class="login-wrapper">
-    <form id="login" >
+    <form id="sign_up" >
       <label for="email">
         <input placeholder="Email" type="text" id="signup_email" name="email">
       </label>
@@ -23,11 +34,6 @@
       <input type="button" onclick="sign_up()" value="Sign up"/>
     </form>
   </div>
-{{else}}
-  <div class="login-wrapper" style="margin-bottom: 8px">
-    Logged in as {{email}}.
-    <form>
-      <input type="button" onclick="sign_out()" value="Exit"/>
-    </form>
-  </div>
-{{/unless}}
+</header>
+</body>
+</html>

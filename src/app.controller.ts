@@ -4,86 +4,104 @@ import {
   Controller,
   Get,
   Render,
-  Request,
-  Post,
   UseGuards,
   UseInterceptors,
-  Res,
-  Req,
 } from '@nestjs/common';
+import { AuthGuard } from './auth/auth.guard';
+import { SessionContainer } from 'supertokens-node/recipe/session';
+import { Session } from './auth/session.decorator';
+import EmailPassword from 'supertokens-node/recipe/emailpassword';
 
 @Controller()
 export class AppController {
-  authorized = false;
-  email: string;
-
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor(private readonly appService: AppService) {}
 
   @Get()
   @Render('index')
-  @UseInterceptors(TimerInterceptor)
-  root() {
-    return { authorized: this.authorized, email: this.email };
+  // @UseInterceptors(TimerInterceptor)
+  @UseGuards(AuthGuard)
+  async root(@Session() session: SessionContainer) {
+    try {
+      const userId = session.getUserId();
+      const userInfo = await EmailPassword.getUserById(userId, session);
+      const email = userInfo.email;
+      return {
+        email: email,
+        authorized: true,
+      };
+    } catch (error) {
+      return { authorized: false };
+    }
   }
 
   @Get('blog')
   @Render('blog')
-  @UseInterceptors(TimerInterceptor)
-  blog() {
-    return { authorized: this.authorized, email: this.email };
+  // @UseInterceptors(TimerInterceptor)
+  @UseGuards(AuthGuard)
+  async blog(@Session() session: SessionContainer) {
+    try {
+      const userId = session.getUserId();
+      const userInfo = await EmailPassword.getUserById(userId, session);
+      const email = userInfo.email;
+      return {
+        email: email,
+        authorized: true,
+      };
+    } catch (error) {
+      return { authorized: false };
+    }
   }
 
   @Get('slider')
   @Render('slider')
-  @UseInterceptors(TimerInterceptor)
-  slider() {
-    return { authorized: this.authorized, email: this.email };
+  // @UseInterceptors(TimerInterceptor)
+  @UseGuards(AuthGuard)
+  async slider(@Session() session: SessionContainer) {
+    try {
+      const userId = session.getUserId();
+      const userInfo = await EmailPassword.getUserById(userId, session);
+      const email = userInfo.email;
+      return {
+        email: email,
+        authorized: true,
+      };
+    } catch (error) {
+      return { authorized: false };
+    }
   }
 
   @Get('todo_list')
   @Render('todo_list')
-  @UseInterceptors(TimerInterceptor)
-  todoList() {
-    return { authorized: this.authorized, email: this.email };
+  // @UseInterceptors(TimerInterceptor)
+  @UseGuards(AuthGuard)
+  async todoList(@Session() session: SessionContainer) {
+    try {
+      const userId = session.getUserId();
+      const userInfo = await EmailPassword.getUserById(userId, session);
+      const email = userInfo.email;
+      return {
+        email: email,
+        authorized: true,
+      };
+    } catch (error) {
+      return { authorized: false };
+    }
+  }
+
+  @Get('/sessioninfo')
+  @UseGuards(AuthGuard)
+  async getSessionInformation(@Session() session: SessionContainer) {
+    try {
+      const userId = session.getUserId();
+      const userInfo = await EmailPassword.getUserById(userId, session);
+      const email = userInfo.email;
+      return {
+        email: email,
+        authorized: true,
+      };
+    } catch (error) {
+      return { authorized: false };
+    }
   }
 }
-
-//   @Post('auth/login')
-//   async login(@Req() req, @Res() res) {
-//     try {
-//       await firebase
-//         .auth()
-//         .signInWithEmailAndPassword(req.body.email, req.body.password);
-//       this.authorized = true;
-//       this.email = req.body.email;
-//       return res.redirect('back');
-//     } catch (e) {
-//       console.log('Unable to authorize.');
-//       this.authorized = true;
-//       this.email = 'email';
-//       return res.redirect('back');
-//     }
-//   }
-//
-//   @Post('auth/register')
-//   async register(@Req() req, @Res() res) {
-//     try {
-//       await firebase
-//         .auth()
-//         .createUserWithEmailAndPassword(req.body.email, req.body.password);
-//       this.authorized = true;
-//       this.email = req.body.email;
-//       return res.redirect('back');
-//     } catch (e) {
-//       console.log('Unable to register.');
-//       return res.redirect('back');
-//     }
-//   }
-//
-//   @Post('logout')
-//   async logout(@Req() req, @Res() res) {
-//     this.authorized = false;
-//     return res.redirect('back');
-//   }
-// }

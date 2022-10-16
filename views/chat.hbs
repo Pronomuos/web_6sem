@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <title>Chat</title>
+  {{> style_bundles }}
+  {{> shared_scripts }}
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.socket.io/4.3.2/socket.io.min.js" integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+  {{> header }}
+</header>
+
+<div class="container">
+  <ul id="messages"></ul>
+
+  <div>
+    <input id="message" type="text" spellcheck="false"/>
+    <button onclick="send()">Send</button>
+  </div>
+</div>
+
+<footer>
+  {{> footer }}
+</footer>
+<!--<script src="./js/chat.js"></script>-->
+<script type="text/javascript">
+  const massage = document.getElementById('message');
+  const notes = document.getElementById('messages');
+  const socket = io();
+
+  massage.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      send();
+    }
+  });
+
+  function send() {
+    socket.emit('msgToServer', '{{ email }}: ' + massage.value);
+    massage.value = '';
+    massage.focus();
+  }
+
+  socket.on('msgToClient', (note) => {
+    console.log('received:', note);
+    receiveMessage(note);
+  });
+
+  function receiveMessage(note) {
+    notes.appendChild(createMessage(note));
+  }
+
+  function createMessage(note) {
+    const li = document.createElement('li');
+    li.appendChild(document.createTextNode(note));
+    return li;
+  }
+</script>
+</body>
+</html>
