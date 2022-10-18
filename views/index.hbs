@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Reshetnikov Roman M33051</title>
+  <meta name="keywords" content="CV, ITMO, ML, DL">
+  <meta name="description" content="Junior data scientist (ML\DL) CV ">
+  <meta name="author" content="Roman Reshetnikov">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="./css/index.css">
+  {{> style_bundles }}
+  {{> shared_scripts }}
+</head>
+
+<body>
+<header>
+  {{> header }}
+</header>
+<main>
+  <section>
+    <h3>Education</h3>
+    <article>
+      <div class='school'>
+        <span>2019-2023</span> <strong>ITMO: Faculty of Information Technologies and Programming.</strong>
+
+      </div>
+    </article>
+  </section>
+  <section>
+    <h3>Courses</h3>
+    <article class='course'>
+      <div class='title'>
+        <h4>MIPT, Yandex: Machine learning and data analysis (2021)</h4>
+      </div>
+      <div class="description">
+        <p>Classical course about ml algorithms.</p>
+      </div>
+    </article>
+    <article class='course'>
+      <div class='title'>
+        <h4>DeepLearning.AI: Deep Learning Specialization (2021)</h4>
+      </div>
+      <div class="description">
+        <p>Classical course about deep learning.</p>
+      </div>
+    </article>
+  </section>
+  <section>
+    <div class='block'>
+      <div class='column'>
+        <h3>Skills</h3>
+        <ol>
+          <li>Languages:</li>
+          <ul>
+            <li>Python 3 (numpy, matplotlib, pandas, sklearn, tensorflow, scipy)</li>
+            <li>C++ (basics + STL/boost, Make/CMake).</li>
+            <li>C#/Java – basic knowledge</li>
+          </ul>
+          <li>DS:</li>
+          <ul>
+            <li>ML: Understanding of linear models, knn, bayes, ensembles, regularization,
+              normalization, overfitting, dimensionality reduction, clustering, t-sne, a/b testing, etc.</li>
+            <li>CV: understanding of cnn, yolo, gan, fast r-cnn, mask r-cnn, u-net, ssd, batch, instance normalisation.</li>
+            <li>NLP: rnn, lstm, bert, tf-idf, transformers, stemming.</li>
+            <li>Knowledge of big data: streaming spark, kafka.</li>
+          </ul>
+          <li>Math: </li>
+          <ul>
+            <li>Descrete, linear algebra, statistics, optimization, mathematical analysis.</li>
+          </ul>
+          <li>Tools: </li>
+          <ul>
+            <li>Git, Docker.</li>
+          </ul>
+          <li>Linux administration, bash.</li>
+          <li>SQl, postgresql, mysql.</li>
+          <li>Knowledge of data structures and algorithms (hash-tables, avl-tree, graphs, substring search, tier).</li>
+          <li>Knowledge of oop patterns.</li>
+        </ol>
+      </div>
+      <div class="column">
+        <h3>Languages</h3>
+        <ul>
+          <li>Russian - Native speaker</li>
+          <li>English - Proficient C1/C2</li>
+          <li>Chinese - A1</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div class="block">
+    <article class="column">
+      <h2>ACII penguin</h2>
+      <br>
+      <pre>
+             . --- .
+           /        \
+          |  O  _  O |
+          |  ./   \. |
+          /  `-._.-'  \
+        .' /         \ `.
+    .-~.-~/           \~-.~-.
+.-~ ~    |             |    ~ ~-.
+`- .     |             |     . -'
+     ~ - |             | - ~
+         \             /
+       ___\           /___
+       ~;_  >- . . -<  _i~
+          `'         `'
+        </pre>
+    </article>
+    <article class=column>
+      <h2>A code snippet</h2>
+      <pre><code>
+X_train, X_test, y_train, y_test = model_selection.
+            train_test_split(X, y, train_size=0.5, stratify=y)
+
+df_train = pd.DataFrame(y_train, columns=['target'])
+df_train['type'] = 'train'
+
+df_test = pd.DataFrame(y_test, columns=['target'])
+df_test['type'] = 'test'
+
+df_set = df_train.append(df_test)
+
+_ = sns.countplot(x='target', hue='type', data=df_set)
+
+print('train samples:', len(X_train))
+print('test samples', len(X_test))
+        </code></pre>
+    </article>
+  </div>
+  <article>
+    <h2>A remarkable  quote</h2>
+    <blockquote>
+                <pre>
+                    <q>It’s <ins>still</ins> <em>magic</em> <del>even</del> if you know <em>how</em> it’s done.</q> – <cite> from A Hat Full of Sky</cite>
+                </pre>
+      <pre id="hidden_quote">
+                    <q>Some quote.</q>
+                </pre>
+    </blockquote>
+
+  </article>
+</main>
+<footer>
+  {{> footer }}
+</footer>
+</body>
+</html>

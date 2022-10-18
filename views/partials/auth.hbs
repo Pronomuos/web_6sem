@@ -1,0 +1,33 @@
+{{#unless authorized}}
+  <!-- Login for -->
+  <div class="login-wrapper">
+    <form id="login">
+      <label for="email">
+        <input placeholder="Email" type="text" id="signin_email" name="email">
+      </label>
+      <label for="password">
+        <input placeholder="Password" type="text" id="signin_password" name="password">
+      </label>
+      <input type="button" onclick="sign_in()" value="Sign in"/>
+    </form>
+  </div>
+  <!-- Registration form -->
+  <div class="login-wrapper">
+    <form id="login" >
+      <label for="email">
+        <input placeholder="Email" type="text" id="signup_email" name="email">
+      </label>
+      <label for="password">
+        <input placeholder="Password" type="text" id="signup_password" name="password">
+      </label>
+      <input type="button" onclick="sign_up()" value="Sign up"/>
+    </form>
+  </div>
+{{else}}
+  <div class="login-wrapper" style="margin-bottom: 8px">
+    Logged in as {{email}}.
+    <form>
+      <input type="button" onclick="sign_out()" value="Exit"/>
+    </form>
+  </div>
+{{/unless}}

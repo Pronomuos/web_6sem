@@ -1,0 +1,36 @@
+header {
+    padding: 6em 8em 4em;
+    text-align: left;
+    /*background-image: url('../img/bg.jpg');*/
+    /*background-size: cover;*/
+    /*background-attachment: fixed;*/
+    background-color: #A7B8BF;
+    color: #ffffff;
+}
+
+header section {
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+header h1, header section {
+    padding-left: 12em;
+}
+
+h1 {
+    text-transform: uppercase;
+    margin: 1em 0;
+}
+
+a:hover {
+    opacity: 0.5;
+}
+
+a {
+    color: #9c5e1c;
+    text-decoration: none;
+}
+
+header {
+    margin: 0 auto;
+}

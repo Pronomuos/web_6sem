@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Login page</title>
+
+  {{> shared_scripts }}
+  {{> style_bundles }}
+</head>
+<body>
+<header>
+  <!-- Login form -->
+  <div class="login-wrapper">
+    <form id="sign_in">
+      <label for="email">
+        <input placeholder="Email" type="text" id="signin_email" name="email">
+      </label>
+      <label for="password">
+        <input placeholder="Password" type="text" id="signin_password" name="password">
+      </label>
+      <input type="button" onclick="sign_in()" value="Sign in"/>
+    </form>
+  </div>
+  <!-- Registration form -->
+  <div class="login-wrapper">
+    <form id="sign_up" >
+      <label for="email">
+        <input placeholder="Email" type="text" id="signup_email" name="email">
+      </label>
+      <label for="password">
+        <input placeholder="Password" type="text" id="signup_password" name="password">
+      </label>
+      <input type="button" onclick="sign_up()" value="Sign up"/>
+    </form>
+  </div>
+</header>
+</body>
+</html>
